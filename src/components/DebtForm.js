@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import {
   FormControl,
   InputLabel,
@@ -20,11 +20,9 @@ const DebtForm = () => {
 
   const handleSubmit = e => {
       e.preventDefault()
-      const payoffMonths = payoffCalc(debt)
-      const payoffYears = payoffMonths / 12
-      const total = payoffMonths * debt.monthlyPayment
+      const { payoffMonths, payoffYears, total } = payoffCalc(debt)
       const calculatedDebt = {...debt, payoffMonths, payoffYears, total }
-      debtListSet(debtList => [...debtList, calculatedDebt])
+      debtListSet([...debtList, calculatedDebt])
       debtSet({
         remainingBalance: '',
         monthlyPayment: '',

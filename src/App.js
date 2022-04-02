@@ -23,13 +23,7 @@ function App() {
     total: ''
   })
   const [debtList, debtListSet] = useState([])
-  
-  
-  const onDebtSubmit = () => {
-    debtListSet(debtList => [...debtList, debt])
-  }
 
-  console.log(debt, debtList)
   return (
     <DebtContext.Provider
       value={{
@@ -42,7 +36,7 @@ function App() {
       <CssBaseline />
     <Container>
       <h1 className="title">Debt Payoff</h1>
-      <DebtForm onFormSubmit={onDebtSubmit} />
+      <DebtForm />
     </Container>
     </DebtContext.Provider>
   );

@@ -1,4 +1,8 @@
+var formatter = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
 
+  });
 
 const payoffCalc = ({remainingBalance, monthlyPayment, interestRate}) => {
     const interest = interestRate / 100
@@ -8,8 +12,15 @@ const payoffCalc = ({remainingBalance, monthlyPayment, interestRate}) => {
     const step4 = 1 + interestPerMonth
     const step5 = -(Math.log10(step3))
     const step6 = Math.log10(step4)
-    const result = step5 / step6
-    return result.toFixed(2)
+    const payoffMonths = step5 / step6
+    const payoffYears = payoffMonths / 12
+    const total = payoffMonths * monthlyPayment
+
+    return {
+        payoffMonths: payoffMonths.toFixed(2),
+        payoffYears: payoffYears.toFixed(2),
+        total: formatter.format(total)
+    }
 }
 
 export default payoffCalc
