@@ -24,7 +24,8 @@ function App() {
     interestRate: '',
     payoffMonths: '',
     payoffYears: '',
-    total: ''
+    total: '',
+    timeRemaining: ''
   })
   const [debtList, debtListSet] = useState([])
 

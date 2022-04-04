@@ -20,8 +20,9 @@ const DebtForm = () => {
 
   const handleSubmit = e => {
       e.preventDefault()
-      const { payoffMonths, payoffYears, total } = payoffCalc(debt)
-      const calculatedDebt = {...debt, payoffMonths, payoffYears, total }
+      const { payoffMonths, payoffYears, total, timeRemaining } = payoffCalc(debt)
+      const calculatedDebt = {...debt, payoffMonths, payoffYears, total, timeRemaining }
+      console.log(calculatedDebt)
       debtListSet([...debtList, calculatedDebt])
       debtSet({
         remainingBalance: '',
@@ -29,12 +30,13 @@ const DebtForm = () => {
         interestRate: '',
         payoffMonths: '',
         payoffYears: '',
-        total: ''
+        total: '',
+        timeRemaining: ''
     })
   }
 
   return (
-    <Box component="form" noValidate onSubmit={handleSubmit}
+    <Box component="form" onSubmit={handleSubmit}
       sx={{
         display: "flex",
         flexWrap: "wrap",
@@ -51,6 +53,10 @@ const DebtForm = () => {
           label="Remaining Balance"
           type="number"
           required
+          inputProps={{
+            maxlenth: 10,
+            step: ".01",
+          }}
         />
       </FormControl>
       <FormControl sx={{ m: 1, width: "48%" }} variant="filled">
@@ -64,6 +70,10 @@ const DebtForm = () => {
           startAdornment={<InputAdornment position="start">$</InputAdornment>}
           type="number"
           required
+          inputProps={{
+            maxlenth: 10,
+            step: ".01"
+          }}
         />
       </FormControl>
       <FormControl sx={{ m: 1, width: "48%" }} variant="filled">
@@ -75,6 +85,11 @@ const DebtForm = () => {
           startAdornment={<InputAdornment position="start">%</InputAdornment>}
           type="number"
           required
+          inputProps={{
+            max: 99.99,
+            maxLength: 4,
+            step: ".01"
+          }}
         />
       </FormControl>
       <Button sx={{ m: 1 }} variant="outlined" type="submit">Submit</Button>

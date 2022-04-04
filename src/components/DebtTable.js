@@ -9,6 +9,7 @@ import {
   Paper
 } from "@mui/material";
 import DebtContext from "../DebtContext";
+import formatter from "../USDformatter";
 
 const DebtTable = () => {
   const { debtList } = useContext(DebtContext)
@@ -19,11 +20,10 @@ const DebtTable = () => {
       <TableHead>
         <TableRow>
           <TableCell>Remaining Balance</TableCell>
-          <TableCell align="right">Monthly Payment</TableCell>
-          <TableCell align="right">Interest Rate %</TableCell>
-          <TableCell align="right">Payoff Months</TableCell>
-          <TableCell align="right">Payoff Years</TableCell>
-          <TableCell align="right">Total Payoff Amount</TableCell>
+          <TableCell align="center">Monthly Payment</TableCell>
+          <TableCell align="center">Interest Rate</TableCell>
+          <TableCell align="center">Payoff Time</TableCell>
+          <TableCell align="center">Total Payoff Amount</TableCell>
         </TableRow>
       </TableHead>
       <TableBody>
@@ -33,13 +33,12 @@ const DebtTable = () => {
             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
           >
             <TableCell component="th" scope="row">
-              {row.remainingBalance}
+              {formatter.format(row.remainingBalance)}
             </TableCell>
-            <TableCell align="right">{row.monthlyPayment}</TableCell>
-            <TableCell align="right">{row.interestRate}</TableCell>
-            <TableCell align="right">{row.payoffMonths}</TableCell>
-            <TableCell align="right">{row.payoffYears}</TableCell>
-            <TableCell align="right">{row.total}</TableCell>
+            <TableCell align="center">{formatter.format(row.monthlyPayment)}</TableCell>
+            <TableCell align="center">{row.interestRate}</TableCell>
+            <TableCell align="center">{row.timeRemaining}</TableCell>
+            <TableCell align="center">{row.total}</TableCell>
           </TableRow>
         ))}
       </TableBody>
