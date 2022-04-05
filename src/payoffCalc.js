@@ -26,8 +26,9 @@ const payoffCalc = ({ remainingBalance, monthlyPayment, interestRate }) => {
         return {
             payoffMonths: '∞',
             payoffYears: '∞',
-            total: remainingBalance,
-            timeRemaining: 'Your payments are not sufficient enough to cover interest. Loan will never be paid off.'
+            total: formatter.format(remainingBalance),
+            timeRemaining: 'Your payments are not sufficient enough to cover interest. Loan will never be paid off.',
+            valid: false
         }
     }
     const step3 = Math.abs(1 - step2)
@@ -39,7 +40,7 @@ const payoffCalc = ({ remainingBalance, monthlyPayment, interestRate }) => {
     const timeRemaining = calculateTimingString(days)
     const payoffYears = payoffMonths / 12
     const total = payoffMonths * monthlyPayment
-    
+
     return {
         remainingBalance: formatter.format(remainingBalance),
         monthlyPayment: formatter.format(monthlyPayment),
@@ -47,7 +48,8 @@ const payoffCalc = ({ remainingBalance, monthlyPayment, interestRate }) => {
         payoffMonths: payoffMonths.toFixed(2),
         payoffYears: payoffYears.toFixed(2),
         total: formatter.format(total),
-        timeRemaining: timeRemaining
+        timeRemaining: timeRemaining,
+        valid: true
     }
 }
 

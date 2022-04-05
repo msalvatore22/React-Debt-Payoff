@@ -6,7 +6,7 @@ import {
   InputAdornment,
   Box,
   FilledInput,
-  Button
+  Button,
 } from "@mui/material";
 import DebtContext from "../DebtContext";
 import payoffCalc from "../payoffCalc";
@@ -18,19 +18,25 @@ const DebtForm = () => {
     debtSet({ ...debt, [prop]: event.target.value });
   };
 
-  const handleSubmit = e => {
-      e.preventDefault()
-      const calculatedDebt = payoffCalc(debt)
-      debtListSet([...debtList, calculatedDebt])
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const calculatedDebt = payoffCalc(debt);
+    if (calculatedDebt.valid === true) {
+      debtListSet([...debtList, calculatedDebt]);
       debtSet({
-        remainingBalance: '',
-        monthlyPayment: '',
-        interestRate: '',
-    })
-  }
+        remainingBalance: "",
+        monthlyPayment: "",
+        interestRate: "",
+      });
+    } else {
+      alert(calculatedDebt.timeRemaining);
+    }
+  };
 
   return (
-    <Box component="form" onSubmit={handleSubmit}
+    <Box
+      component="form"
+      onSubmit={handleSubmit}
       sx={{
         display: "flex",
         flexWrap: "wrap",
@@ -48,9 +54,9 @@ const DebtForm = () => {
           type="number"
           required
           inputProps={{
-            maxlenth: 9,
+            max: 1000000000,
             step: ".01",
-            min: 1
+            min: 1,
           }}
         />
       </FormControl>
@@ -66,9 +72,9 @@ const DebtForm = () => {
           type="number"
           required
           inputProps={{
-            maxLenth: 9,
+            max: 100000000,
             step: ".01",
-            min: 1
+            min: 1,
           }}
         />
       </FormControl>
@@ -84,12 +90,13 @@ const DebtForm = () => {
           inputProps={{
             min: 0.01,
             max: 99.99,
-            maxLength: 4,
-            step: ".01"
+            step: ".01",
           }}
         />
       </FormControl>
-      <Button sx={{ m: 1 }} variant="outlined" type="submit">Submit</Button>
+      <Button sx={{ m: 1 }} variant="outlined" type="submit">
+        Submit
+      </Button>
     </Box>
   );
 };
