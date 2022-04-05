@@ -17,6 +17,34 @@ const calculateTimingString = numOfDays => {
     return `${years} Years, ${months} Months and ${days} Days`
 }
 
+const generatePayoffMonthYear = numOfMonths => {
+    const result = []
+    const start_date = new Date(new Date().getFullYear(), new Date().getMonth());
+    
+    while(numOfMonths>0){
+      start_date.setMonth(start_date.getMonth() + 1)
+            
+      result.push(start_date.toLocaleString('default', { month: 'long' , year: 'numeric'}));
+      numOfMonths--
+    }
+    return result
+}
+
+const generatePayoffRemainingBalances = (remainingBalance, monthlyPayment, interestPerMonth) => {
+    const result = []
+    while(remainingBalance>0){
+        const principalReduction = monthlyPayment - (remainingBalance * interestPerMonth)
+        
+        if (principalReduction>remainingBalance){
+            result.push(0)
+        } else {
+            result.push((remainingBalance - principalReduction).toFixed(2))
+        }
+        remainingBalance = remainingBalance - principalReduction
+    }
+    return result
+}
+
 const payoffCalc = ({ remainingBalance, monthlyPayment, interestRate }) => {
     const interest = interestRate / 100
     const interestPerMonth = interest / 12
@@ -36,10 +64,15 @@ const payoffCalc = ({ remainingBalance, monthlyPayment, interestRate }) => {
     const step5 = Math.log10(1/step3)
     const step6 = Math.log10(step4)
     const payoffMonths = step5 / step6
+    const payoffMonthsRounded = Math.ceil(payoffMonths)
     const days = Math.round(payoffMonths * 30.4167)
-    const timeRemaining = calculateTimingString(days)
     const payoffYears = payoffMonths / 12
     const total = payoffMonths * monthlyPayment
+    const totalInterestPaid = total - remainingBalance
+
+    const timeRemaining = calculateTimingString(days)
+    const payoffScheduleMonthYear = generatePayoffMonthYear(payoffMonthsRounded)
+    const payoffScheduleBalances = generatePayoffRemainingBalances(remainingBalance, monthlyPayment, interestPerMonth)
 
     return {
         remainingBalance: formatter.format(remainingBalance),
@@ -48,7 +81,10 @@ const payoffCalc = ({ remainingBalance, monthlyPayment, interestRate }) => {
         payoffMonths: payoffMonths.toFixed(2),
         payoffYears: payoffYears.toFixed(2),
         total: formatter.format(total),
+        totalInterestPaid: formatter.format(totalInterestPaid),
         timeRemaining: timeRemaining,
+        payoffScheduleMonthYear,
+        payoffScheduleBalances,
         valid: true
     }
 }
