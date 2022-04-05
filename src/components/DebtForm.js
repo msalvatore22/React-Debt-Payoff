@@ -20,18 +20,12 @@ const DebtForm = () => {
 
   const handleSubmit = e => {
       e.preventDefault()
-      const { payoffMonths, payoffYears, total, timeRemaining } = payoffCalc(debt)
-      const calculatedDebt = {...debt, payoffMonths, payoffYears, total, timeRemaining }
-      console.log(calculatedDebt)
+      const calculatedDebt = payoffCalc(debt)
       debtListSet([...debtList, calculatedDebt])
       debtSet({
         remainingBalance: '',
         monthlyPayment: '',
         interestRate: '',
-        payoffMonths: '',
-        payoffYears: '',
-        total: '',
-        timeRemaining: ''
     })
   }
 

@@ -9,13 +9,12 @@ import {
   Paper
 } from "@mui/material";
 import DebtContext from "../DebtContext";
-import formatter from "../USDformatter";
 
 const DebtTable = () => {
   const { debtList } = useContext(DebtContext)
 
-  return (
-    <TableContainer component={Paper}>
+  return debtList.length>0 ? (
+    <TableContainer sx={{marginTop: 5 }} component={Paper}>
     <Table sx={{ minWidth: 650 }} aria-label="simple table">
       <TableHead>
         <TableRow>
@@ -33,10 +32,10 @@ const DebtTable = () => {
             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
           >
             <TableCell component="th" scope="row">
-              {formatter.format(row.remainingBalance)}
+              {row.remainingBalance}
             </TableCell>
-            <TableCell align="center">{formatter.format(row.monthlyPayment)}</TableCell>
-            <TableCell align="center">{row.interestRate}</TableCell>
+            <TableCell align="center">{row.monthlyPayment}</TableCell>
+            <TableCell align="center">{row.interestRate}%</TableCell>
             <TableCell align="center">{row.timeRemaining}</TableCell>
             <TableCell align="center">{row.total}</TableCell>
           </TableRow>
@@ -44,7 +43,7 @@ const DebtTable = () => {
       </TableBody>
     </Table>
   </TableContainer>
-  )
+  ) : null
 
 }
 

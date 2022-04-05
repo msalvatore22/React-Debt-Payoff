@@ -22,10 +22,6 @@ function App() {
     remainingBalance: '',
     monthlyPayment: '',
     interestRate: '',
-    payoffMonths: '',
-    payoffYears: '',
-    total: '',
-    timeRemaining: ''
   })
   const [debtList, debtListSet] = useState([])
 
