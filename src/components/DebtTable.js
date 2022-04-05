@@ -14,7 +14,7 @@ const DebtTable = () => {
   const { debtList } = useContext(DebtContext)
 
   return debtList.length>0 ? (
-    <TableContainer sx={{marginTop: 5 }} component={Paper}>
+    <TableContainer sx={{marginTop: 5, marginBottom: 5 }} component={Paper}>
     <Table sx={{ minWidth: 650 }} aria-label="simple table">
       <TableHead>
         <TableRow>

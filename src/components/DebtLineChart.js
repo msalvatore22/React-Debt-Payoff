@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from "react";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -8,9 +8,9 @@ import {
   Title,
   Tooltip,
   Legend,
-} from 'chart.js';
-import { Line } from 'react-chartjs-2';
-import faker from 'faker';
+} from "chart.js";
+import { Line } from "react-chartjs-2";
+import DebtContext from "../DebtContext";
 
 ChartJS.register(
   CategoryScale,
@@ -22,39 +22,45 @@ ChartJS.register(
   Legend
 );
 
-export const options = {
+const options = {
   responsive: true,
   plugins: {
     legend: {
-      position: 'top',
+      position: "top",
     },
     title: {
       display: true,
-      text: 'Chart.js Line Chart',
+      text: "Debt Payoff Timeline",
     },
   },
 };
 
-const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+export default function LineChart() {
+  const { debtList } = useContext(DebtContext);
 
-export const data = {
-  labels,
-  datasets: [
-    {
-      label: 'Dataset 1',
-      data: labels.map(() => faker.datatype.number({ min: -1000, max: 1000 })),
-      borderColor: 'rgb(255, 99, 132)',
-      backgroundColor: 'rgba(255, 99, 132, 0.5)',
-    },
-    {
-      label: 'Dataset 2',
-      data: labels.map(() => faker.datatype.number({ min: -1000, max: 1000 })),
-      borderColor: 'rgb(53, 162, 235)',
-      backgroundColor: 'rgba(53, 162, 235, 0.5)',
-    },
-  ],
-};
+  const findLongestArray = (dl) => {
+    let longest = [];
+    dl.forEach((debt) => {
+      if (debt.payoffScheduleMonthYear > longest) {
+        longest = debt.payoffScheduleMonthYear;
+      }
+    });
+    return longest;
+  };
 
-export function App() {
-  return <Line options={options} data={data} />;
+  const labels = findLongestArray(debtList);
+
+  const data = {
+    labels,
+    datasets: debtList.map((debt, index) => ({
+      label: `Debt ${index+1}`,
+      data: debt.payoffScheduleBalances,
+      borderColor: "rgb(255, 99, 132)",
+      backgroundColor: "rgba(255, 99, 132, 0.5)",
+      cubicInterpolationMode: "monotone",
+      tension: 0.4,
+    })),
+  };
+
+  return debtList.length > 0 ? <Line options={options} data={data} /> : null;
 }

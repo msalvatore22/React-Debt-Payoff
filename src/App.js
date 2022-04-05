@@ -7,6 +7,7 @@ import DebtContext from "./DebtContext";
 
 import DebtForm from './components/DebtForm'
 import DebtTable from "./components/DebtTable";
+import DebtLineChart from "./components/DebtLineChart"
 
 const Container = styled.div`
   margin: auto;
@@ -39,6 +40,7 @@ function App() {
       <Title className="title">Debt Payoff</Title>
       <DebtForm />
       <DebtTable />
+      <DebtLineChart />
     </Container>
     </DebtContext.Provider>
   );
