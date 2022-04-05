@@ -48,8 +48,9 @@ const DebtForm = () => {
           type="number"
           required
           inputProps={{
-            maxlenth: 10,
+            maxlenth: 9,
             step: ".01",
+            min: 1
           }}
         />
       </FormControl>
@@ -65,8 +66,9 @@ const DebtForm = () => {
           type="number"
           required
           inputProps={{
-            maxlenth: 10,
-            step: ".01"
+            maxLenth: 9,
+            step: ".01",
+            min: 1
           }}
         />
       </FormControl>
@@ -80,6 +82,7 @@ const DebtForm = () => {
           type="number"
           required
           inputProps={{
+            min: 0.01,
             max: 99.99,
             maxLength: 4,
             step: ".01"
