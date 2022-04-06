@@ -10,9 +10,10 @@ import {
 } from "@mui/material";
 import DebtContext from "../DebtContext";
 import payoffCalc from "../payoffCalc";
+import ButtonExample from "./ColorPicker";
 
 const DebtForm = () => {
-  const { debt, debtSet, debtList, debtListSet } = useContext(DebtContext);
+  const { debt, debtSet, debtList, debtListSet, color } = useContext(DebtContext);
 
   const handleChange = (prop) => (event) => {
     debtSet({ ...debt, [prop]: event.target.value });
@@ -22,6 +23,7 @@ const DebtForm = () => {
     e.preventDefault();
     const calculatedDebt = payoffCalc(debt);
     if (calculatedDebt.valid === true) {
+      calculatedDebt["color"] = color
       debtListSet([...debtList, calculatedDebt]);
       debtSet({
         remainingBalance: "",
@@ -94,6 +96,7 @@ const DebtForm = () => {
           }}
         />
       </FormControl>
+      <ButtonExample />
       <Button sx={{ m: 1 }} variant="outlined" type="submit">
         Submit
       </Button>
