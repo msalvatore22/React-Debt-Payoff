@@ -1,65 +1,63 @@
-import React, { useState, useContext } from 'react'
-import reactCSS from 'reactcss'
-import { SketchPicker } from 'react-color'
+import React, { useState, useContext } from "react";
+import reactCSS from "reactcss";
+import { SketchPicker } from "react-color";
+import Button from "@mui/material/Button";
 import DebtContext from "../DebtContext";
 
 const ColorPicker = () => {
-  const [displayColorPicker, displayColorPickerSet] = useState(false)
+  const [displayColorPicker, displayColorPickerSet] = useState(false);
   const { color, colorSet } = useContext(DebtContext);
 
   const handleClick = () => {
-    displayColorPickerSet(!displayColorPicker)
+    displayColorPickerSet(!displayColorPicker);
   };
 
   const handleClose = () => {
-    displayColorPickerSet(false)
+    displayColorPickerSet(false);
   };
 
   const handleChange = (color) => {
-    colorSet(color.rgb)
+    colorSet(color);
   };
 
   const styles = reactCSS({
-    'default': {
+    default: {
       color: {
-        width: '36px',
-        height: '14px',
-        borderRadius: '2px',
-        background: `rgba(${ color.r }, ${ color.g }, ${ color.b }, ${ color.a })`,
-      },
-      swatch: {
-        padding: '5px',
-        background: '#fff',
-        borderRadius: '1px',
-        boxShadow: '0 0 0 1px rgba(0,0,0,.1)',
-        cursor: 'pointer',
+        width: "0.875rem",
+        height: "0.875rem",
+        borderRadius: "2px",
+        background: `${color.hex}`,
+        margin: "20px",
+        cursor: "pointer",
       },
       popover: {
-        position: 'absolute',
-        zIndex: '2',
+        position: "absolute",
+        zIndex: "2",
       },
       cover: {
-        position: 'fixed',
-        top: '0px',
-        right: '0px',
-        bottom: '0px',
-        left: '0px',
+        position: "fixed",
+        top: "0px",
+        right: "0px",
+        bottom: "0px",
+        left: "0px",
       },
     },
   });
 
   return (
-    <div>
-      <div style={ styles.swatch } onClick={ handleClick }>
-        <div style={ styles.color } />
-      </div>
-      { displayColorPicker ? <div style={ styles.popover }>
-        <div style={ styles.cover } onClick={ handleClose }/>
-        <SketchPicker color={ color } onChange={ handleChange } />
-      </div> : null }
+    <div style={{ display: "flex" }}>
+      <div style={styles.color} onClick={handleClick}></div>
+      <Button sx={{ m: 1 }} variant="outlined" onClick={handleClick}>
+        Pick a color
+      </Button>
+      {displayColorPicker ? (
+        <div style={styles.popover}>
+          <div style={styles.cover} onClick={handleClose} />
+          <SketchPicker color={color} onChange={handleChange} />
+        </div>
+      ) : null}
     </div>
-  )
-  
-}
+  );
+};
 
-export default ColorPicker
+export default ColorPicker;

@@ -25,7 +25,7 @@ function App() {
     interestRate: "",
   });
   const [debtList, debtListSet] = useState([]);
-  const [color, colorSet] = useState({ r: "25", g: "118", b: "210", a: "1" });
+  const [color, colorSet] = useState({rgb: { r: "25", g: "118", b: "210", a: "1" }, hex: '#1976d2'});
 
 
   return (

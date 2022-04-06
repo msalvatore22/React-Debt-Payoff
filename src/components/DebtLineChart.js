@@ -55,8 +55,8 @@ export default function LineChart() {
     datasets: debtList.map((debt, index) => ({
       label: `Debt ${index + 1}`,
       data: debt.payoffScheduleBalances,
-      borderColor: `rgb(${debt.color.r}, ${debt.color.g}, ${debt.color.b})`,
-      backgroundColor: `rgba(${debt.color.r}, ${debt.color.g}, ${debt.color.b}, 0.5)`,
+      borderColor: `rgb(${debt.color.rgb.r}, ${debt.color.rgb.g}, ${debt.color.rgb.b})`,
+      backgroundColor: `rgba(${debt.color.rgb.r}, ${debt.color.rgb.g}, ${debt.color.rgb.b}, 0.5)`,
       cubicInterpolationMode: "monotone",
       tension: 0.6,
       fill: false
