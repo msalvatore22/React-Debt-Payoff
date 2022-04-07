@@ -53,7 +53,7 @@ export default function LineChart() {
   const data = {
     labels,
     datasets: debtList.map((debt, index) => ({
-      label: `Debt ${index + 1}`,
+      label: `${debt.accountName}: ${debt.accountType}`,
       data: debt.payoffScheduleBalances,
       borderColor: `rgb(${debt.color.rgb.r}, ${debt.color.rgb.g}, ${debt.color.rgb.b})`,
       backgroundColor: `rgba(${debt.color.rgb.r}, ${debt.color.rgb.g}, ${debt.color.rgb.b}, 0.5)`,

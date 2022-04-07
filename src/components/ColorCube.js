@@ -6,8 +6,7 @@ const ColorCube = props => {
     height: "0.875rem",
     borderRadius: "2px",
     background: `${props.color.hex}`,
-    margin: "20px",
-    cursor: "pointer"
+    margin: "10px",
   };
   return <div style={colorStyle}></div>;
 };

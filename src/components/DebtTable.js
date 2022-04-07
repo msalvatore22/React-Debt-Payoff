@@ -8,6 +8,7 @@ import {
   TableRow,
   Paper
 } from "@mui/material";
+import ColorCube from "./ColorCube";
 import DebtContext from "../DebtContext";
 
 const DebtTable = () => {
@@ -18,6 +19,7 @@ const DebtTable = () => {
     <Table sx={{ minWidth: 650 }} aria-label="simple table">
       <TableHead>
         <TableRow>
+          <TableCell></TableCell>
           <TableCell>Remaining Balance</TableCell>
           <TableCell align="center">Monthly Payment</TableCell>
           <TableCell align="center">Interest Rate</TableCell>
@@ -31,6 +33,7 @@ const DebtTable = () => {
             key={idx}
             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
           >
+            <TableCell><ColorCube color={row.color}/></TableCell>
             <TableCell component="th" scope="row">
               {row.remainingBalance}
             </TableCell>

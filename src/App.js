@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./App.css";
 import styled from "@emotion/styled";
-import { CssBaseline } from "@mui/material";
+import { CssBaseline, Container } from "@mui/material";
 
 import DebtContext from "./DebtContext";
 
@@ -9,17 +9,14 @@ import DebtForm from "./components/DebtForm";
 import DebtTable from "./components/DebtTable";
 import DebtLineChart from "./components/DebtLineChart";
 
-const Container = styled.div`
-  margin: auto;
-  width: 80%;
-  padding-top: 1rem;
-`;
 const Title = styled.h1`
   text-align: center;
 `;
 
 function App() {
   const [debt, debtSet] = useState({
+    accountName: "",
+    accountType: "",
     remainingBalance: "",
     monthlyPayment: "",
     interestRate: "",
@@ -40,7 +37,7 @@ function App() {
       }}
     >
       <CssBaseline />
-      <Container>
+      <Container maxWidth="lg">
         <Title className="title">Debt Payoff</Title>
         <DebtForm />
         <DebtTable />

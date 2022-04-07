@@ -45,7 +45,7 @@ const generatePayoffRemainingBalances = (remainingBalance, monthlyPayment, inter
     return result
 }
 
-const payoffCalc = ({ remainingBalance, monthlyPayment, interestRate }) => {
+const payoffCalc = ({ remainingBalance, monthlyPayment, interestRate, accountName, accountType }) => {
     const interest = interestRate / 100
     const interestPerMonth = interest / 12
     const step2 = (remainingBalance / monthlyPayment) * interestPerMonth
@@ -75,6 +75,8 @@ const payoffCalc = ({ remainingBalance, monthlyPayment, interestRate }) => {
     const payoffScheduleBalances = generatePayoffRemainingBalances(remainingBalance, monthlyPayment, interestPerMonth)
 
     return {
+        accountName,
+        accountType,
         remainingBalance: formatter.format(remainingBalance),
         monthlyPayment: formatter.format(monthlyPayment),
         interestRate: Number.parseFloat(interestRate).toFixed(2),

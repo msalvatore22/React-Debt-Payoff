@@ -27,11 +27,12 @@ const ColorPicker = () => {
         height: "0.875rem",
         borderRadius: "2px",
         background: `${color.hex}`,
-        margin: "20px",
+        margin: "10px",
         cursor: "pointer",
       },
       popover: {
         position: "absolute",
+        marginTop: "400px",
         zIndex: "2",
       },
       cover: {
@@ -45,7 +46,7 @@ const ColorPicker = () => {
   });
 
   return (
-    <div style={{ display: "flex" }}>
+    <div style={{ display: "flex", alignItems: "center" }}>
       <div style={styles.color} onClick={handleClick}></div>
       <Button sx={{ m: 1 }} variant="outlined" onClick={handleClick}>
         Pick a color
