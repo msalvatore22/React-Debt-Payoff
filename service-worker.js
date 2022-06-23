@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/React-Debt-Payoff/precache-manifest.10e2b80d42793a174f3181c0df818dfa.js"
+  "/React-Debt-Payoff/precache-manifest.208f5a26dc68d7434641902cac55bcbb.js"
 );
 
 workbox.clientsClaim();
